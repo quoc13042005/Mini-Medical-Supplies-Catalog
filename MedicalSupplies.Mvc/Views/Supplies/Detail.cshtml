@@ -1,0 +1,48 @@
+@model MedicalSupplies.Mvc.ViewModels.SupplyDetailViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết Vật tư Y tế";
+}
+
+<h2>Chi tiết Vật tư Y tế</h2>
+
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h4>@Model.Name</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Mã VT:</strong> @Model.Code</p>
+                <p><strong>Nhóm vật tư:</strong> @Model.Category</p>
+                <p><strong>Nhà cung cấp:</strong> @Model.Provider</p>
+                <p><strong>Đơn giá:</strong> @Model.Price.ToString("N0") VNĐ</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Số lượng tồn kho:</strong> @Model.Quantity</p>
+                <p><strong>Mức tồn tối thiểu:</strong> @Model.MinQuantity</p>
+                <p>
+                    <strong>Trạng thái:</strong> 
+                    @{
+                        if (Model.Status == MedicalSupplies.Mvc.Models.SupplyStatus.InStock)
+                        {
+                            <span class="badge bg-success">Còn hàng</span>
+                        }
+                        else if (Model.Status == MedicalSupplies.Mvc.Models.SupplyStatus.NeedsRestock)
+                        {
+                            <span class="badge bg-warning text-dark">Cần nhập thêm</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Hết hàng</span>
+                        }
+                    }
+                </p>
+                <p><strong>Cập nhật lần cuối:</strong> @Model.LastUpdated.ToString("dd/MM/yyyy HH:mm")</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>

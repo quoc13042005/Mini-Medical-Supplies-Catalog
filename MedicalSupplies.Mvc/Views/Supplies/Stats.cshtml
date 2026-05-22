@@ -1,0 +1,52 @@
+@model MedicalSupplies.Mvc.ViewModels.SupplyStatsViewModel
+
+@{
+    ViewData["Title"] = "Thống kê Vật tư Y tế";
+}
+
+<h2>Thống kê Tổng quan</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-3">
+        <div class="card bg-info text-white h-100">
+            <div class="card-body">
+                <h5 class="card-title">Tổng số nhóm vật tư</h5>
+                <h2 class="display-4">@Model.TotalCategories</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body">
+                <h5 class="card-title">Tổng số lượng vật tư</h5>
+                <h2 class="display-4">@Model.TotalQuantity</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body">
+                <h5 class="card-title">Tổng giá trị tồn kho</h5>
+                <h2 class="display-4">@Model.TotalInventoryValue.ToString("N0") VNĐ</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card bg-warning text-dark h-100">
+            <div class="card-body">
+                <h5 class="card-title">Số vật tư cần nhập thêm</h5>
+                <h2 class="display-4">@Model.NeedsRestockCount</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card bg-danger text-white h-100">
+            <div class="card-body">
+                <h5 class="card-title">Số vật tư đã hết</h5>
+                <h2 class="display-4">@Model.OutOfStockCount</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Quay lại danh sách</a>

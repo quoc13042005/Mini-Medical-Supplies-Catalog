@@ -1,0 +1,50 @@
+@model IEnumerable<MedicalSupplies.Mvc.ViewModels.SupplyListItemViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách Vật tư Y tế";
+}
+
+<h2>Danh sách Vật tư Y tế</h2>
+
+<a href="/Supplies/Stats" class="btn btn-info mb-3">Xem Thống kê</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã VT</th>
+            <th>Tên vật tư</th>
+            <th>Nhóm</th>
+            <th>Đơn giá</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.Category</td>
+                <td>@item.Price.ToString("N0") VNĐ</td>
+                <td>
+                    @if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.InStock)
+                    {
+                        <span class="badge bg-success">Còn hàng</span>
+                    }
+                    else if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.NeedsRestock)
+                    {
+                        <span class="badge bg-warning text-dark">Cần nhập thêm</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Hết hàng</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Supplies" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
