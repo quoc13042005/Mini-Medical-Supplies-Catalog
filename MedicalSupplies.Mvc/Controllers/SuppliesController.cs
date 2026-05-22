@@ -14,9 +14,13 @@ public class SuppliesController : Controller
     }
 
     // 1. Trang hiển thị danh sách dữ liệu
-    public IActionResult Index()
+    public IActionResult Index(string? searchString, string? category, Models.SupplyStatus? status, int page = 1)
     {
-        var supplies = _supplyService.GetAllSupplies();
+        int pageSize = 10; // Thay đổi thành 10 theo yêu cầu
+        int totalItems;
+
+        var supplies = _supplyService.GetPagedSupplies(searchString, category, status, page, pageSize, out totalItems);
+        
         var viewModels = supplies.Select(s => new SupplyListItemViewModel
         {
             Id = s.Id,
@@ -27,7 +31,33 @@ public class SuppliesController : Controller
             Status = s.Status
         }).ToList();
 
-        return View(viewModels);
+        var categories = _supplyService.GetAllCategories()
+            .Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = c, Text = c })
+            .ToList();
+        categories.Insert(0, new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = "", Text = "-- Tất cả nhóm --" });
+
+        var statusList = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>
+        {
+            new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = "", Text = "-- Tất cả trạng thái --" },
+            new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = ((int)Models.SupplyStatus.InStock).ToString(), Text = "Còn hàng" },
+            new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = ((int)Models.SupplyStatus.NeedsRestock).ToString(), Text = "Cần nhập thêm" },
+            new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = ((int)Models.SupplyStatus.OutOfStock).ToString(), Text = "Đã hết hàng" }
+        };
+
+        var model = new SupplyIndexViewModel
+        {
+            Supplies = viewModels,
+            SearchString = searchString,
+            Category = category,
+            Status = status,
+            Categories = categories,
+            StatusList = statusList,
+            CurrentPage = page,
+            TotalPages = (int)Math.Ceiling((double)totalItems / pageSize),
+            PageSize = pageSize
+        };
+
+        return View(model);
     }
 
     // 2. Trang xem chi tiết một đối tượng

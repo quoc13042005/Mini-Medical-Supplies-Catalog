@@ -52,4 +52,33 @@ public class SupplyService : ISupplyService
     {
         return _supplies.Count(s => s.Status == SupplyStatus.NeedsRestock);
     }
+
+    public IEnumerable<string> GetAllCategories()
+    {
+        return _supplies.Select(s => s.Category).Distinct().OrderBy(c => c);
+    }
+
+    public IEnumerable<Supply> GetPagedSupplies(string? searchString, string? category, SupplyStatus? status, int page, int pageSize, out int totalItems)
+    {
+        var query = _supplies.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchString))
+        {
+            var lowerSearch = searchString.ToLower();
+            query = query.Where(s => s.Name.ToLower().Contains(lowerSearch) || s.Code.ToLower().Contains(lowerSearch));
+        }
+
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            query = query.Where(s => s.Category == category);
+        }
+
+        if (status.HasValue)
+        {
+            query = query.Where(s => s.Status == status.Value);
+        }
+
+        totalItems = query.Count();
+        return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+    }
 }

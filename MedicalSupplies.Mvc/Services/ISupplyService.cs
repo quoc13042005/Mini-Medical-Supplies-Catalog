@@ -11,4 +11,8 @@ public interface ISupplyService
     decimal GetTotalInventoryValue();
     int GetOutOfStockCount();
     int GetNeedsRestockCount();
+
+    // Tìm kiếm, lọc và phân trang
+    IEnumerable<string> GetAllCategories();
+    IEnumerable<Supply> GetPagedSupplies(string? searchString, string? category, SupplyStatus? status, int page, int pageSize, out int totalItems);
 }
