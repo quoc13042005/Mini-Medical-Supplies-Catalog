@@ -21,7 +21,6 @@ D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\scopedcss\bundle\MedicalSupplies.Mvc.styles.css
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\scopedcss\projectbundle\MedicalSupplies.Mvc.bundle.scp.css
-D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\compressed\z9o28jlsg4-{0}-b9sayid5wm-b9sayid5wm.gz
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\compressed\j8u0shfz60-{0}-61n19gt1b8-61n19gt1b8.gz
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\compressed\bjsgf2opas-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\compressed\sxbuks05pz-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -96,3 +95,4 @@ D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\MedicalSupplies.Mvc.genruntimeconfig.cache
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\ref\MedicalSupplies.Mvc.dll
 D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\MedicalSupplies.Mvc.sourcelink.json
+D:\learning\asp.net\lab02\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\obj\Debug\net10.0\compressed\z9o28jlsg4-{0}-q8icb4d6vj-q8icb4d6vj.gz

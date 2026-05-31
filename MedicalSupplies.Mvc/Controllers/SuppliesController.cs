@@ -27,7 +27,9 @@ public class SuppliesController : Controller
             Code = s.Code,
             Name = s.Name,
             Category = s.Category,
+            Provider = s.Provider,
             Price = s.Price,
+            Quantity = s.Quantity,
             Status = s.Status
         }).ToList();
 
@@ -124,5 +126,60 @@ public class SuppliesController : Controller
     public IActionResult Force404()
     {
         return NotFound();
+    }
+
+    [HttpGet]
+    public IActionResult Search(string? keyword, decimal? minPrice)
+    {
+        var supplies = _supplyService.Search(keyword, minPrice)
+            .Select(s => new SupplyListItemViewModel
+            {
+                Id = s.Id,
+                Code = s.Code,
+                Name = s.Name,
+                Category = s.Category,
+                Provider = s.Provider,
+                Price = s.Price,
+                Quantity = s.Quantity,
+                Status = s.Status
+            })
+            .ToList();
+
+        var viewModel = new SupplySearchViewModel
+        {
+            Keyword = keyword ?? "",
+            MinPrice = minPrice,
+            Supplies = supplies
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        var viewModel = new SupplyCreateViewModel
+        {
+            Quantity = 1,
+            MinQuantity = 1
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(SupplyCreateViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        _supplyService.Create(model);
+
+        TempData["SuccessMessage"] = "Đã thêm vật tư thành công.";
+
+        return RedirectToAction(nameof(Index));
     }
 }

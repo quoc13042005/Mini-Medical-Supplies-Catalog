@@ -1,0 +1,75 @@
+@model MedicalSupplies.Mvc.ViewModels.SupplySearchViewModel
+
+@{
+    ViewData["Title"] = "Tìm kiếm Vật tư";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Tìm kiếm Vật tư</h2>
+        <p class="page-description">
+            Form GET dùng Query String để tìm kiếm vật tư y tế.
+        </p>
+    </div>
+
+    <a class="btn btn-light"
+       asp-controller="Supplies"
+       asp-action="Index">
+        Quay lại danh sách
+    </a>
+</div>
+
+<div class="form-layout">
+    <form class="form-box"
+          asp-controller="Supplies"
+          asp-action="Search"
+          method="get">
+
+        <div class="form-group">
+            <label asp-for="Keyword">Từ khóa</label>
+            <input asp-for="Keyword"
+                   class="form-control"
+                   placeholder="Ví dụ: mask, khẩu trang, MS001" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MinPrice">Giá tối thiểu</label>
+            <input asp-for="MinPrice"
+                   class="form-control"
+                   placeholder="Ví dụ: 50000" />
+        </div>
+
+        <button class="btn" type="submit">
+            Tìm kiếm
+        </button>
+
+        <a class="btn btn-secondary"
+           asp-controller="Supplies"
+           asp-action="Search">
+            Xóa lọc
+        </a>
+    </form>
+
+    <div>
+        <h3>Kết quả tìm kiếm</h3>
+
+        <p>
+            Từ khóa: <strong>@Model.Keyword</strong>
+        </p>
+
+        <p>
+            Giá tối thiểu: <strong>@Model.MinPrice</strong>
+        </p>
+
+        @if (Model.Supplies.Count == 0)
+        {
+            <div class="warning-box">
+                Không tìm thấy vật tư y tế nào phù hợp. Vui lòng thử từ khóa khác.
+            </div>
+        }
+        else
+        {
+            <partial name="_SupplySearchResultTable" model="Model.Supplies" />
+        }
+    </div>
+</div>

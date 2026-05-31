@@ -1,0 +1,51 @@
+@model List<SupplyListItemViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã vật tư</th>
+            <th>Tên vật tư</th>
+            <th>Nhà cung cấp</th>
+            <th>Nhóm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Trạng thái</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.Provider</td>
+                <td>@item.Category</td>
+                <td>@item.Price.ToString("N0") VND</td>
+                <td>@item.Quantity</td>
+                <td>
+                    @if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.InStock)
+                    {
+                        <span class="badge badge-success">Còn hàng</span>
+                    }
+                    else if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.NeedsRestock)
+                    {
+                        <span class="badge badge-warning">Cần nhập thêm</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Đã hết hàng</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Supplies"
+                       asp-action="Detail"
+                       asp-route-id="@item.Id">
+                        Xem
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

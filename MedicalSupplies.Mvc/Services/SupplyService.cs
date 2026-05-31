@@ -81,4 +81,49 @@ public class SupplyService : ISupplyService
         totalItems = query.Count();
         return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
     }
+
+    public List<Supply> Search(string? keyword, decimal? minPrice)
+    {
+        var query = _supplies.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(keyword))
+        {
+            query = query.Where(s =>
+                s.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                s.Category.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                s.Code.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                s.Provider.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (minPrice.HasValue)
+        {
+            query = query.Where(s => s.Price >= minPrice.Value);
+        }
+
+        return query.ToList();
+    }
+
+    public Supply Create(ViewModels.SupplyCreateViewModel model)
+    {
+        var newId = _supplies.Count == 0
+            ? 1
+            : _supplies.Max(s => s.Id) + 1;
+
+        var supply = new Supply
+        {
+            Id = newId,
+            Code = model.Code,
+            Name = model.Name,
+            Category = model.Category,
+            Provider = model.Provider,
+            Price = model.Price,
+            Quantity = model.Quantity,
+            MinQuantity = model.MinQuantity,
+            LastUpdated = DateTime.Now
+        };
+
+        _supplies.Add(supply);
+
+        return supply;
+    }
 }

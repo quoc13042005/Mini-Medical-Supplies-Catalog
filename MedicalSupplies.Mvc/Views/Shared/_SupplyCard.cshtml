@@ -1,0 +1,43 @@
+@model SupplyListItemViewModel
+
+<div class="product-card">
+    <h3>@Model.Name</h3>
+
+    <p class="product-meta">
+        Mã vật tư: @Model.Code
+    </p>
+
+    <p class="product-meta">
+        Nhóm: @Model.Category
+    </p>
+
+    <p class="product-price">
+        @Model.Price.ToString("N0") VND
+    </p>
+
+    <p>
+        Số lượng tồn: <strong>@Model.Quantity</strong>
+    </p>
+
+    @if (Model.Status == MedicalSupplies.Mvc.Models.SupplyStatus.InStock)
+    {
+        <span class="badge badge-success">Còn hàng</span>
+    }
+    else if (Model.Status == MedicalSupplies.Mvc.Models.SupplyStatus.NeedsRestock)
+    {
+        <span class="badge badge-warning">Cần nhập thêm</span>
+    }
+    else
+    {
+        <span class="badge badge-danger">Đã hết hàng</span>
+    }
+
+    <div class="card-actions">
+        <a class="btn btn-light"
+           asp-controller="Supplies"
+           asp-action="Detail"
+           asp-route-id="@Model.Id">
+            Xem chi tiết
+        </a>
+    </div>
+</div>
