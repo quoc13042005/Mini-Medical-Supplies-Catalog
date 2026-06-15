@@ -1,12 +1,18 @@
 @model IEnumerable<MedicalSupplies.Mvc.ViewModels.SupplyListItemViewModel>
 
 @{
-    ViewData["Title"] = "Danh sách Vật tư Y tế";
+    ViewData["Title"] = "Lọc Vật Tư Y Tế";
 }
 
-<h2>Danh sách Vật tư Y tế</h2>
-<a href="/Supplies/Filter" class="btn btn-secondary mb-3">Lọc Dữ Liệu (Feature 2)</a>
-<a href="/Issues/Create" class="btn btn-success mb-3">Tạo Phiếu Xuất Kho</a>
+<h2>Lọc Vật Tư Y Tế (Feature 2)</h2>
+
+<form method="get" action="/Supplies/Filter" class="mb-4 d-flex gap-2 align-items-center">
+    <input type="number" name="categoryId" class="form-control w-auto" placeholder="Category ID (e.g. 1)" value="@ViewBag.CategoryId" />
+    <input type="number" name="minPrice" class="form-control w-auto" placeholder="Giá từ" value="@ViewBag.MinPrice" />
+    <input type="number" name="maxPrice" class="form-control w-auto" placeholder="Giá đến" value="@ViewBag.MaxPrice" />
+    <button type="submit" class="btn btn-primary">Lọc</button>
+    <a href="/Supplies/Filter" class="btn btn-outline-secondary">Xóa</a>
+</form>
 
 <table class="table table-striped">
     <thead>

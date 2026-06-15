@@ -1,0 +1,10 @@
+*.docx
+*.pdf
+*.py
+*.db
+*.db-shm
+*.db-wal
+**/bin/
+**/obj/
+~$*
+*.tmp

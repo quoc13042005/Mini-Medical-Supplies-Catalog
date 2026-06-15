@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Data Health Check";
+}
+
+<h2>Data Health Check</h2>
+
+<ul class="list-group mt-3">
+    <li class="list-group-item">
+        <strong>Database Connection:</strong> 
+        <span class="badge bg-@(ViewBag.CanConnect ? "success" : "danger")">
+            @(ViewBag.CanConnect ? "Connected" : "Failed")
+        </span>
+    </li>
+    <li class="list-group-item">
+        <strong>Supply Categories Count:</strong> @ViewBag.CategoryCount
+    </li>
+    <li class="list-group-item">
+        <strong>Supplies Count:</strong> @ViewBag.SupplyCount
+    </li>
+    <li class="list-group-item">
+        <strong>Applied Migrations:</strong>
+        @if (ViewBag.AppliedMigrations.Count > 0)
+        {
+            <ul>
+                @foreach(var m in ViewBag.AppliedMigrations)
+                {
+                    <li>@m</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span>None</span>
+        }
+    </li>
+    <li class="list-group-item">
+        <strong>Pending Migrations:</strong>
+        @if (ViewBag.PendingMigrations.Count > 0)
+        {
+            <ul class="text-danger">
+                @foreach(var m in ViewBag.PendingMigrations)
+                {
+                    <li>@m</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span class="text-success">Up to date</span>
+        }
+    </li>
+</ul>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedicalSupplies.Mvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e64d325c69a17af3518700180542d4e90cd1678")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38928b19bdc2d85deb8f720995ba781c775a942b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedicalSupplies.Mvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedicalSupplies.Mvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
