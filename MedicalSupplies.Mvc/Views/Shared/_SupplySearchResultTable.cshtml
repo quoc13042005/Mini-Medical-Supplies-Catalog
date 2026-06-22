@@ -1,47 +1,36 @@
-@model List<SupplyListItemViewModel>
+@model IEnumerable<MedicalSupplies.Mvc.Models.Supply>
 
 <table class="table">
     <thead>
         <tr>
             <th>Mã vật tư</th>
             <th>Tên vật tư</th>
-            <th>Nhà cung cấp</th>
             <th>Nhóm</th>
+            <th>Nhà CC</th>
             <th>Đơn giá</th>
-            <th>Số lượng</th>
-            <th>Trạng thái</th>
-            <th>Chi tiết</th>
+            <th>SL tồn</th>
+            <th>Hành động</th>
         </tr>
     </thead>
-
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var supply in Model)
         {
             <tr>
-                <td>@item.Code</td>
-                <td>@item.Name</td>
-                <td>@item.Provider</td>
-                <td>@item.Category</td>
-                <td>@item.Price.ToString("N0") VND</td>
-                <td>@item.Quantity</td>
+                <td><strong>@supply.Code</strong></td>
+                <td>@supply.Name</td>
                 <td>
-                    @if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.InStock)
-                    {
-                        <span class="badge badge-success">Còn hàng</span>
-                    }
-                    else if (item.Status == MedicalSupplies.Mvc.Models.SupplyStatus.NeedsRestock)
-                    {
-                        <span class="badge badge-warning">Cần nhập thêm</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-danger">Đã hết hàng</span>
-                    }
+                    <span class="badge badge-secondary">
+                        @supply.Category?.Name
+                    </span>
                 </td>
+                <td>@supply.Provider</td>
+                <td class="product-price">@supply.Price.ToString("N0") đ</td>
+                <td>@supply.Quantity</td>
                 <td>
                     <a asp-controller="Supplies"
                        asp-action="Detail"
-                       asp-route-id="@item.Id">
+                       asp-route-id="@supply.Id"
+                       class="btn btn-sm btn-light">
                         Xem
                     </a>
                 </td>

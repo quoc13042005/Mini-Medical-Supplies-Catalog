@@ -27,6 +27,33 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Search(string? keyword, decimal? minPrice)
+    {
+        var query = _context.Supplies.Include(s => s.Category).AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(keyword))
+        {
+            query = query.Where(s => s.Name.Contains(keyword) || s.Code.Contains(keyword));
+        }
+
+        if (minPrice.HasValue)
+        {
+            query = query.Where(s => s.Price >= minPrice.Value);
+        }
+
+        var supplies = await query.ToListAsync();
+
+        var viewModel = new SupplySearchViewModel
+        {
+            Keyword = keyword ?? "",
+            MinPrice = minPrice,
+            Supplies = supplies
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpGet]
     public IActionResult Create()
     {
         return View(new SupplyCreateViewModel());

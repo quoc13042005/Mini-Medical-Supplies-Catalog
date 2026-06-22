@@ -6,5 +6,5 @@ public class SupplySearchViewModel
 
     public decimal? MinPrice { get; set; }
 
-    public List<SupplyListItemViewModel> Supplies { get; set; } = new();
+    public List<MedicalSupplies.Mvc.Models.Supply> Supplies { get; set; } = new();
 }
