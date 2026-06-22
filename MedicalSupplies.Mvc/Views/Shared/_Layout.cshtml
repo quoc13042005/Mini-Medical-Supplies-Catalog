@@ -13,12 +13,11 @@
             <div class="brand">
                 <a asp-controller="Home" asp-action="Index">MedicalSupplies.Mvc</a>
             </div>
-
-                <a asp-controller="Home" asp-action="Index">Home</a>
-                <a asp-controller="Supplies" asp-action="Index">Vật Tư</a>
-                <a asp-controller="Supplies" asp-action="Filter">Lọc (F2)</a>
-                <a asp-controller="Issues" asp-action="Create">Xuất Kho</a>
-                <a asp-controller="DataHealth" asp-action="Index">Health Check</a>
+            <nav class="main-nav">
+                <a asp-area="" asp-controller="Supplies" asp-action="Index">Quản lý Vật tư</a>
+                <a asp-area="" asp-controller="Supplies" asp-action="Trash">Thùng rác</a>
+                <a asp-area="" asp-controller="DataHealth" asp-action="Index">Data Health</a>
+                <a class="text-danger fw-bold" href="/api/supplies/9999">API Error Demo</a>
             </nav>
         </div>
     </header>

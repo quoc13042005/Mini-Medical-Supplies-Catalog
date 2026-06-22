@@ -8,3 +8,6 @@
 **/obj/
 ~$*
 *.tmp
+*.pdf
+*.docx
+generate_medical_docx.py

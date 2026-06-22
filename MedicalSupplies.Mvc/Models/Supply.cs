@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MedicalSupplies.Mvc.Models;
 
 public class Supply
@@ -12,4 +14,10 @@ public class Supply
     public decimal Price { get; set; } // Đơn giá
     public int Quantity { get; set; } // Số lượng tồn kho
     public DateTime LastUpdated { get; set; } // Ngày cập nhật gần nhất
+
+    public bool IsDeleted { get; set; }
+    public DateTime? DeletedAt { get; set; }
+
+    [Timestamp]
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
 }

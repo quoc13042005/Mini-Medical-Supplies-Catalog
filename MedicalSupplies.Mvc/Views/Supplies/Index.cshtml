@@ -1,12 +1,17 @@
-@model IEnumerable<MedicalSupplies.Mvc.ViewModels.SupplyListItemViewModel>
+@model IEnumerable<MedicalSupplies.Mvc.Models.Supply>
 
 @{
     ViewData["Title"] = "Danh sách Vật tư Y tế";
 }
 
 <h2>Danh sách Vật tư Y tế</h2>
-<a href="/Supplies/Filter" class="btn btn-secondary mb-3">Lọc Dữ Liệu (Feature 2)</a>
-<a href="/Issues/Create" class="btn btn-success mb-3">Tạo Phiếu Xuất Kho</a>
+<a href="/Supplies/Create" class="btn btn-primary mb-3">Thêm Vật tư mới</a>
+<a href="/Supplies/Trash" class="btn btn-secondary mb-3">Thùng rác</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
 
 <table class="table table-striped">
     <thead>
@@ -18,7 +23,7 @@
             <th>Nhà cung cấp</th>
             <th>Giá</th>
             <th>Tồn kho</th>
-            <th>Trạng thái</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -28,11 +33,16 @@
                 <td>@item.Code</td>
                 <td>@item.Barcode</td>
                 <td>@item.Name</td>
-                <td>@item.Category</td>
+                <td>@item.Category?.Name</td>
                 <td>@item.Provider</td>
                 <td>@item.Price.ToString("N0")</td>
                 <td>@item.Quantity</td>
-                <td>@item.Status</td>
+                <td>
+                    <a href="/Supplies/Edit/@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa (soft delete) vật tư này không?');">Xóa</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

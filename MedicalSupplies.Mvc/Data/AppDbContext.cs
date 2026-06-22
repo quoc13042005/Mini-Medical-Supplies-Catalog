@@ -41,6 +41,10 @@ public class AppDbContext : DbContext
                   .WithMany(c => c.Supplies)
                   .HasForeignKey(s => s.SupplyCategoryId);
 
+            entity.HasIndex(s => s.Code).IsUnique();
+            entity.Property(s => s.RowVersion).IsRowVersion();
+            entity.HasQueryFilter(s => !s.IsDeleted);
+
             entity.HasData(
                 new Supply { Id = 1, SupplyCategoryId = 1, Code = "MS001", Barcode = "893001", Name = "Khẩu trang y tế 4 lớp", Provider = "MediPlast", Price = 50000, Quantity = 1000, LastUpdated = new DateTime(2023, 1, 1) },
                 new Supply { Id = 2, SupplyCategoryId = 1, Code = "MS002", Barcode = "893002", Name = "Găng tay y tế Nitrile", Provider = "VGlove", Price = 80000, Quantity = 500, LastUpdated = new DateTime(2023, 1, 1) },

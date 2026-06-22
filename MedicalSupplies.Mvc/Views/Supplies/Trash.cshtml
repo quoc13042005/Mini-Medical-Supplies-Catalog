@@ -1,0 +1,39 @@
+@model IEnumerable<MedicalSupplies.Mvc.Models.Supply>
+
+@{
+    ViewData["Title"] = "Thùng rác - Vật tư đã xóa";
+}
+
+<h2>Thùng rác - Vật tư đã xóa</h2>
+<a href="/Supplies/Index" class="btn btn-secondary mb-3">Quay lại Danh sách</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped text-secondary">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Ngày xóa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.DeletedAt?.ToString("g")</td>
+                <td>
+                    <form asp-action="Restore" asp-route-id="@item.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-success">Khôi phục</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,52 +1,40 @@
+@model IEnumerable<dynamic>
+
 @{
     ViewData["Title"] = "Data Health Check";
 }
 
-<h2>Data Health Check</h2>
+<h2>Tình trạng Database & Khả năng xử lý</h2>
 
-<ul class="list-group mt-3">
-    <li class="list-group-item">
-        <strong>Database Connection:</strong> 
-        <span class="badge bg-@(ViewBag.CanConnect ? "success" : "danger")">
-            @(ViewBag.CanConnect ? "Connected" : "Failed")
-        </span>
-    </li>
-    <li class="list-group-item">
-        <strong>Supply Categories Count:</strong> @ViewBag.CategoryCount
-    </li>
-    <li class="list-group-item">
-        <strong>Supplies Count:</strong> @ViewBag.SupplyCount
-    </li>
-    <li class="list-group-item">
-        <strong>Applied Migrations:</strong>
-        @if (ViewBag.AppliedMigrations.Count > 0)
+<table class="table table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Mục kiểm tra</th>
+            <th>Mong đợi</th>
+            <th>Thực tế</th>
+            <th>Trạng thái</th>
+            <th>Ghi chú</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
-            <ul>
-                @foreach(var m in ViewBag.AppliedMigrations)
-                {
-                    <li>@m</li>
-                }
-            </ul>
+            <tr>
+                <td>@item.Check</td>
+                <td>@item.Expected</td>
+                <td>@item.Actual</td>
+                <td>
+                    @if (item.Status == "OK")
+                    {
+                        <span class="badge bg-success">@item.Status</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">@item.Status</span>
+                    }
+                </td>
+                <td>@item.Note</td>
+            </tr>
         }
-        else
-        {
-            <span>None</span>
-        }
-    </li>
-    <li class="list-group-item">
-        <strong>Pending Migrations:</strong>
-        @if (ViewBag.PendingMigrations.Count > 0)
-        {
-            <ul class="text-danger">
-                @foreach(var m in ViewBag.PendingMigrations)
-                {
-                    <li>@m</li>
-                }
-            </ul>
-        }
-        else
-        {
-            <span class="text-success">Up to date</span>
-        }
-    </li>
-</ul>
+    </tbody>
+</table>

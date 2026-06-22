@@ -4,25 +4,24 @@ namespace MedicalSupplies.Mvc.ViewModels;
 
 public class SupplyCreateViewModel
 {
-    [Required(ErrorMessage = "Mã vật tư không được để trống")]
-    public string Code { get; set; } = "";
+    [Required(ErrorMessage = "Mã vật tư là bắt buộc.")]
+    [RegularExpression(@"^[A-Z0-9\-]+$", ErrorMessage = "Mã vật tư chỉ gồm chữ in hoa, số và dấu -.")]
+    public string Code { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Tên vật tư không được để trống")]
-    [StringLength(100, ErrorMessage = "Tên vật tư không được vượt quá 100 ký tự")]
-    public string Name { get; set; } = "";
+    [Required(ErrorMessage = "Tên vật tư là bắt buộc.")]
+    [StringLength(200, MinimumLength = 3)]
+    public string Name { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Nhóm vật tư không được để trống")]
-    public string Category { get; set; } = "";
+    public string? Barcode { get; set; }
 
-    [Required(ErrorMessage = "Nhà cung cấp không được để trống")]
-    public string Provider { get; set; } = "";
+    [Required(ErrorMessage = "Danh mục là bắt buộc.")]
+    public int SupplyCategoryId { get; set; }
 
-    [Range(1, 100000000, ErrorMessage = "Đơn giá phải lớn hơn 0")]
+    public string? Provider { get; set; }
+
+    [Range(1000, 100000000, ErrorMessage = "Giá phải từ 1.000 đến 100.000.000.")]
     public decimal Price { get; set; }
 
-    [Range(0, 100000, ErrorMessage = "Số lượng tồn không được âm")]
+    [Range(0, 100000, ErrorMessage = "Số lượng phải từ 0 đến 100.000.")]
     public int Quantity { get; set; }
-
-    [Range(0, 10000, ErrorMessage = "Mức tồn tối thiểu không được âm")]
-    public int MinQuantity { get; set; }
 }
