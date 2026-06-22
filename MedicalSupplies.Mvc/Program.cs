@@ -21,7 +21,8 @@ builder.Services.AddControllersWithViews();
 
 // Add ProblemDetails and HealthChecks
 builder.Services.AddProblemDetails();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<AppDbContext>("database_ready_check");
 
 builder.Services.Configure<AppSettings>(
     builder.Configuration.GetSection("AppSettings"));
@@ -48,8 +49,14 @@ app.UseRouting();
 app.UseAuthorization();
 
 // Map HealthChecks
-app.MapHealthChecks("/health/live");
-app.MapHealthChecks("/health/ready");
+app.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = _ => false // Only check if the app is responsive
+});
+app.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+{
+    Predicate = _ => true // Check all including DB
+});
 
 // Map API Error Demo
 app.MapGet("/api/supplies/{id:int}", async (int id, AppDbContext db, HttpContext http) =>

@@ -437,3 +437,4 @@ D:/learning/asp.net/lab02/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/obj/
 /Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/obj/Debug/net10.0/MedicalSupplies.Mvc.pdb
 /Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/obj/Debug/net10.0/MedicalSupplies.Mvc.genruntimeconfig.cache
 /Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/obj/Debug/net10.0/ref/MedicalSupplies.Mvc.dll
+/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/bin/Debug/net10.0/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
