@@ -39,6 +39,7 @@
                 <td>@item.Quantity</td>
                 <td>
                     <a href="/Supplies/Edit/@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    <a href="/Supplies/AdjustStock/@item.Id" class="btn btn-sm btn-info" style="color: white; background-color: #0dcaf0;">Kho (F2)</a>
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa (soft delete) vật tư này không?');">Xóa</button>
                     </form>

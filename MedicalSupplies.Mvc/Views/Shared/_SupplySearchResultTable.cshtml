@@ -33,6 +33,12 @@
                        class="btn btn-sm btn-light">
                         Xem
                     </a>
+                    <a asp-controller="Supplies"
+                       asp-action="AdjustStock"
+                       asp-route-id="@supply.Id"
+                       class="btn btn-sm btn-secondary" style="margin-left: 4px;">
+                        Kho (F2)
+                    </a>
                 </td>
             </tr>
         }

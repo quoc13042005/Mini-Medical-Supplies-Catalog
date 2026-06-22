@@ -1,0 +1,60 @@
+@model MedicalSupplies.Mvc.ViewModels.SupplyAdjustStockViewModel
+
+@{
+    ViewData["Title"] = "Điều chỉnh số lượng";
+}
+
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Điều chỉnh số lượng kho</h2>
+        <p class="page-description">Thêm hoặc bớt số lượng vật tư nhanh chóng (Feature 2)</p>
+    </div>
+    <a asp-action="Index" class="btn btn-light">Quay lại danh sách</a>
+</div>
+
+<div class="form-layout">
+    <form asp-action="AdjustStock" method="post" class="form-box">
+        <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="RowVersion" />
+
+        <div class="form-group">
+            <label asp-for="Code"></label>
+            <input asp-for="Code" class="form-control" readonly style="background: #f1f5f9; color: #64748b;" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" readonly style="background: #f1f5f9; color: #64748b;" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CurrentQuantity"></label>
+            <input asp-for="CurrentQuantity" class="form-control" readonly style="background: #f1f5f9; color: #64748b; font-weight: bold;" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AdjustQuantity"></label>
+            <input asp-for="AdjustQuantity" class="form-control" placeholder="VD: 10 (nhập thêm 10) hoặc -5 (xuất 5)" />
+            <span asp-validation-for="AdjustQuantity" class="text-danger" style="font-size: 14px; margin-top: 4px; display: block;"></span>
+        </div>
+
+        <div class="card-actions">
+            <button type="submit" class="btn">Lưu thay đổi</button>
+        </div>
+    </form>
+    
+    <div>
+        <div class="info-box">
+            <h4>Hướng dẫn Test Concurrency (Câu 14)</h4>
+            <p>1. Mở trang này ở 2 tab trình duyệt khác nhau.</p>
+            <p>2. Ở Tab 1, nhập số lượng thay đổi và bấm Lưu (Sẽ thành công).</p>
+            <p>3. Ở Tab 2, tiếp tục nhập số và bấm Lưu.</p>
+            <p><strong>Kết quả:</strong> Hệ thống sẽ từ chối và hiển thị thông báo lỗi màu đỏ vì <em>RowVersion</em> của Tab 2 đã bị cũ so với Database sau khi Tab 1 lưu!</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

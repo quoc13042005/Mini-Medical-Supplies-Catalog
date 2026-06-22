@@ -42,7 +42,7 @@ public class AppDbContext : DbContext
                   .HasForeignKey(s => s.SupplyCategoryId);
 
             entity.HasIndex(s => s.Code).IsUnique();
-            entity.Property(s => s.RowVersion).IsRowVersion();
+            entity.Property(s => s.RowVersion).IsConcurrencyToken();
             entity.HasQueryFilter(s => !s.IsDeleted);
 
             entity.HasData(

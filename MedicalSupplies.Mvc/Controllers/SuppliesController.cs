@@ -136,8 +136,11 @@ public class SuppliesController : Controller
         supply.Provider = model.Provider ?? "";
         supply.SupplyCategoryId = model.SupplyCategoryId;
         supply.LastUpdated = DateTime.Now;
+        
+        // SQLite doesn't auto-update RowVersion, we must manually change it on update
+        supply.RowVersion = Guid.NewGuid().ToByteArray();
 
-        byte[]? originalRv = string.IsNullOrEmpty(model.RowVersion) ? null : Convert.FromBase64String(model.RowVersion);
+        byte[] originalRv = string.IsNullOrEmpty(model.RowVersion) ? Array.Empty<byte>() : Convert.FromBase64String(model.RowVersion);
         _context.Entry(supply).Property("RowVersion").OriginalValue = originalRv;
 
         try
@@ -150,6 +153,80 @@ public class SuppliesController : Controller
         catch (DbUpdateConcurrencyException)
         {
             ModelState.AddModelError(string.Empty, "Dữ liệu đã được người khác cập nhật. Vui lòng tải lại trang và thử lại.");
+            return View(model);
+        }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AdjustStock(int id)
+    {
+        var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
+        if (supply == null) return NotFound();
+
+        var model = new SupplyAdjustStockViewModel
+        {
+            Id = supply.Id,
+            Code = supply.Code,
+            Name = supply.Name,
+            CurrentQuantity = supply.Quantity,
+            RowVersion = supply.RowVersion == null ? "" : Convert.ToBase64String(supply.RowVersion)
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AdjustStock(int id, SupplyAdjustStockViewModel model)
+    {
+        if (id != model.Id) return NotFound();
+
+        var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
+        if (supply == null) return NotFound();
+
+        // Server-side validation for negative total stock
+        if (supply.Quantity + model.AdjustQuantity < 0)
+        {
+            ModelState.AddModelError("AdjustQuantity", $"Không thể xuất {Math.Abs(model.AdjustQuantity)} vì tồn kho hiện tại chỉ còn {supply.Quantity}.");
+            
+            // Need to reset viewmodel data because they might be lost in post
+            model.Code = supply.Code;
+            model.Name = supply.Name;
+            model.CurrentQuantity = supply.Quantity;
+            return View(model);
+        }
+
+        if (!ModelState.IsValid)
+        {
+            model.Code = supply.Code;
+            model.Name = supply.Name;
+            model.CurrentQuantity = supply.Quantity;
+            return View(model);
+        }
+
+        // Apply changes
+        supply.Quantity += model.AdjustQuantity;
+        supply.LastUpdated = DateTime.Now;
+        
+        // SQLite doesn't auto-update RowVersion, we must manually change it on update
+        supply.RowVersion = Guid.NewGuid().ToByteArray();
+
+        byte[] originalRv = string.IsNullOrEmpty(model.RowVersion) ? Array.Empty<byte>() : Convert.FromBase64String(model.RowVersion);
+        _context.Entry(supply).Property("RowVersion").OriginalValue = originalRv;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+            _logger.LogInformation("Stock adjusted. SupplyId={SupplyId}, Change={Change}, NewQuantity={NewQuantity}", id, model.AdjustQuantity, supply.Quantity);
+            TempData["Success"] = $"Đã {(model.AdjustQuantity >= 0 ? "thêm" : "xuất")} {Math.Abs(model.AdjustQuantity)} vào kho thành công.";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            ModelState.AddModelError(string.Empty, "Dữ liệu đã được người khác cập nhật. Vui lòng tải lại trang và thử lại.");
+            model.Code = supply.Code;
+            model.Name = supply.Name;
+            model.CurrentQuantity = supply.Quantity;
             return View(model);
         }
     }
