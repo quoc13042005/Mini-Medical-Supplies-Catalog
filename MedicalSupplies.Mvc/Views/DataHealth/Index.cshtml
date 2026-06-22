@@ -1,40 +1,97 @@
-@model IEnumerable<dynamic>
+@model MedicalSupplies.Mvc.ViewModels.DataHealthDashboardViewModel
 
 @{
-    ViewData["Title"] = "Data Health Check";
+    ViewData["Title"] = "Dashboard Vận Hành";
 }
 
-<h2>Tình trạng Database & Khả năng xử lý</h2>
+<div class="page-header">
+    <div>
+        <h2 class="page-title">Dashboard Vận Hành (Feature Bonus)</h2>
+        <p class="page-description">Báo cáo số liệu thời gian thực sử dụng truy vấn AsNoTracking() để tối ưu hiệu suất.</p>
+    </div>
+</div>
 
-<table class="table table-bordered mt-3">
-    <thead class="table-dark">
-        <tr>
-            <th>Mục kiểm tra</th>
-            <th>Mong đợi</th>
-            <th>Thực tế</th>
-            <th>Trạng thái</th>
-            <th>Ghi chú</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Check</td>
-                <td>@item.Expected</td>
-                <td>@item.Actual</td>
-                <td>
-                    @if (item.Status == "OK")
-                    {
-                        <span class="badge bg-success">@item.Status</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-danger">@item.Status</span>
-                    }
-                </td>
-                <td>@item.Note</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card h-100 shadow-sm" style="border-left: 4px solid #0d6efd;">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Vật tư đang hoạt động</h6>
+                <h3 class="mb-0 text-primary">@Model.TotalActiveSupplies</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card h-100 shadow-sm" style="border-left: 4px solid #dc3545;">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Vật tư hết hàng</h6>
+                <h3 class="mb-0 text-danger">@Model.OutOfStockSupplies</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card h-100 shadow-sm" style="border-left: 4px solid #ffc107;">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Vật tư trong thùng rác</h6>
+                <h3 class="mb-0 text-warning">@Model.TotalDeletedSupplies</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card h-100 shadow-sm" style="border-left: 4px solid #198754;">
+            <div class="card-body">
+                <h6 class="text-muted mb-2">Danh mục hàng hóa</h6>
+                <h3 class="mb-0 text-success">@Model.TotalCategories</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Thống kê Tài chính</h5>
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <h6 class="text-muted">Tổng giá trị tồn kho hiện tại</h6>
+                <h2 class="text-success mb-0">@Model.TotalInventoryValue.ToString("N0") VNĐ</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Trạng thái CSDL (Health Check)</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted">Provider:</td>
+                            <td class="fw-bold">@Model.DatabaseProvider</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Connection:</td>
+                            <td><span class="badge bg-success">@Model.ConnectionStatus</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Lần kiểm tra cuối:</td>
+                            <td>@Model.LastChecked.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading">Tối ưu hóa Truy vấn (AsNoTracking)</h5>
+        <p class="mb-0">Các con số trên được tính toán bằng LINQ với <code>AsNoTracking()</code>. Vì Dashboard chỉ có nhu cầu đọc (Read-only) và không cần lưu lại thay đổi, phương pháp này giúp tiết kiệm đáng kể bộ nhớ RAM của Server so với truy vấn thông thường.</p>
+    </div>
+</div>
