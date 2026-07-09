@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -100,9 +100,9 @@ namespace MedicalSupplies.Mvc.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Vật tư tiêu hao" },
-                    { 2, "Dụng cụ tiêm truyền" },
-                    { 3, "Thiết bị y tế" }
+                    { 1, "V?t tu ti�u hao" },
+                    { 2, "D?ng c? ti�m truy?n" },
+                    { 3, "Thi?t b? y t?" }
                 });
 
             migrationBuilder.InsertData(
@@ -110,11 +110,11 @@ namespace MedicalSupplies.Mvc.Migrations
                 columns: new[] { "Id", "Barcode", "Code", "LastUpdated", "Name", "Price", "Provider", "Quantity", "SupplyCategoryId" },
                 values: new object[,]
                 {
-                    { 1, "893001", "MS001", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Khẩu trang y tế 4 lớp", 50000m, "MediPlast", 1000, 1 },
-                    { 2, "893002", "MS002", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Găng tay y tế Nitrile", 80000m, "VGlove", 500, 1 },
-                    { 3, "893003", "MS003", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bơm tiêm nhựa 5ml", 1500m, "Vinahoc", 0, 2 },
-                    { 4, "893004", "MS004", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dây truyền dịch", 8000m, "Danapha", 15, 2 },
-                    { 5, "893005", "MS005", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Máy đo huyết áp điện tử", 1200000m, "Omron", 15, 3 }
+                    { 1, "893001", "MS001", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kh?u trang y t? 4 l?p", 50000m, "MediPlast", 1000, 1 },
+                    { 2, "893002", "MS002", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gang tay y t? Nitrile", 80000m, "VGlove", 500, 1 },
+                    { 3, "893003", "MS003", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bom ti�m nh?a 5ml", 1500m, "Vinahoc", 0, 2 },
+                    { 4, "893004", "MS004", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "D�y truy?n d?ch", 8000m, "Danapha", 15, 2 },
+                    { 5, "893005", "MS005", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "M�y do huy?t �p di?n t?", 1200000m, "Omron", 15, 3 }
                 });
 
             migrationBuilder.CreateIndex(

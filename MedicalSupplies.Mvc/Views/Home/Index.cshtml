@@ -1,9 +1,58 @@
+@model MedicalSupplies.Mvc.ViewModels.DashboardViewModel
 @{
-    ViewData["Title"] = "Trang chủ";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Chào mừng đến với Hệ thống Quản lý Vật tư Y tế</h1>
-    <p>Hệ thống giúp theo dõi, quản lý vật tư y tế, thiết bị và vật dụng trong bệnh viện hoặc phòng khám.</p>
-    <a href="/Supplies" class="btn btn-primary mt-3">Xem danh sách Vật tư</a>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Final Project Dashboard</h1>
+        <p class="page-description">Tổng quan hệ thống, quyền truy cập và trạng thái vận hành.</p>
+    </div>
+</div>
+
+<div class="stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px;">
+    <div class="stat-card" style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 20px; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">@Model.TotalProducts</div>
+        <div class="stat-label" style="color: #3b82f6;">Supplies (Active + deleted)</div>
+    </div>
+    
+    <div class="stat-card" style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 20px; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 2rem; font-weight: bold; color: #14532d;">@Model.TotalOrders</div>
+        <div class="stat-label" style="color: #22c55e;">Issues</div>
+    </div>
+    
+    <div class="stat-card" style="background: #fff7ed; border: 1px solid #fed7aa; padding: 20px; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 2rem; font-weight: bold; color: #9a3412;">@Model.TotalAuditLogs</div>
+        <div class="stat-label" style="color: #f97316;">Audit Logs</div>
+    </div>
+
+    <div class="stat-card" style="background: #faf5ff; border: 1px solid #e9d5ff; padding: 20px; border-radius: 8px; text-align: center;">
+        <div class="stat-number" style="font-size: 2rem; font-weight: bold; color: #581c87;">8/8</div>
+        <div class="stat-label" style="color: #a855f7;">Security Controls enabled</div>
+    </div>
+</div>
+
+<div class="row" style="display: flex; gap: 20px;">
+    <div class="col-md-6" style="flex: 1;">
+        <div class="form-box" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h4 style="margin-top: 0;">Role-based quick actions</h4>
+            <ul style="list-style: none; padding-left: 0; line-height: 2;">
+                <li>✓ <strong>Admin</strong>: Create / Edit / Delete Supply, Upload Image, Search Audit Log</li>
+                <li>✓ <strong>Staff</strong>: View Supplies and Issues, Adjust Stock</li>
+                <li>✓ <strong>User</strong>: View public catalog (nếu có)</li>
+                <li>✓ <strong>Anonymous</strong>: Login / Register only</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6" style="flex: 1;">
+        <div class="form-box" style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <h4 style="margin-top: 0;">Security Metrics (Today)</h4>
+            <ul style="list-style: none; padding-left: 0; line-height: 2;">
+                <li>Access Denied Count: <span class="badge" style="background: #ef4444; color: white; padding: 2px 8px; border-radius: 12px;">@Model.AccessDeniedCountToday</span></li>
+                <li>Sensitive Actions (Success): <span class="badge" style="background: #22c55e; color: white; padding: 2px 8px; border-radius: 12px;">@Model.SensitiveActionsToday</span></li>
+                <li>Upload Image Failed: <span class="badge" style="background: #eab308; color: white; padding: 2px 8px; border-radius: 12px;">@Model.UploadDeniedCountToday</span></li>
+            </ul>
+        </div>
+    </div>
 </div>

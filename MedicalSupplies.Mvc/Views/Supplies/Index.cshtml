@@ -1,12 +1,17 @@
 @model IEnumerable<MedicalSupplies.Mvc.Models.Supply>
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 
 @{
     ViewData["Title"] = "Danh sách Vật tư Y tế";
 }
 
 <h2>Danh sách Vật tư Y tế</h2>
-<a href="/Supplies/Create" class="btn btn-primary mb-3">Thêm Vật tư mới</a>
-<a href="/Supplies/Trash" class="btn btn-secondary mb-3">Thùng rác</a>
+@if ((await AuthorizationService.AuthorizeAsync(User, "CanManageProduct")).Succeeded)
+{
+    <a href="/Supplies/Create" class="btn btn-primary mb-3">Thêm Vật tư mới</a>
+    <a href="/Supplies/Trash" class="btn btn-secondary mb-3">Thùng rác</a>
+}
 
 @if (TempData["Success"] != null)
 {
@@ -17,6 +22,7 @@
     <thead>
         <tr>
             <th>Mã</th>
+            <th>Ảnh</th>
             <th>Mã Vạch</th>
             <th>Tên</th>
             <th>Danh mục</th>
@@ -31,6 +37,12 @@
         {
             <tr>
                 <td>@item.Code</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" alt="@item.Name" style="max-width: 50px; border-radius: 4px;" />
+                    }
+                </td>
                 <td>@item.Barcode</td>
                 <td>@item.Name</td>
                 <td>@item.Category?.Name</td>
@@ -38,11 +50,24 @@
                 <td>@item.Price.ToString("N0")</td>
                 <td>@item.Quantity</td>
                 <td>
-                    <a href="/Supplies/Edit/@item.Id" class="btn btn-sm btn-warning">Sửa</a>
-                    <a href="/Supplies/AdjustStock/@item.Id" class="btn btn-sm btn-info" style="color: white; background-color: #0dcaf0;">Kho (F2)</a>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa (soft delete) vật tư này không?');">Xóa</button>
-                    </form>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "CanManageProduct")).Succeeded)
+                    {
+                        <a href="/Supplies/Edit/@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    }
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "CanUploadProductImage")).Succeeded)
+                    {
+                        <a href="/Supplies/UploadImage/@item.Id" class="btn btn-sm btn-secondary">Ảnh</a>
+                    }
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "CanAdjustStock")).Succeeded)
+                    {
+                        <a href="/Supplies/AdjustStock/@item.Id" class="btn btn-sm btn-info" style="color: white; background-color: #0dcaf0;">Kho</a>
+                    }
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "CanManageProduct")).Succeeded)
+                    {
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa (soft delete) vật tư này không?');">Xóa</button>
+                        </form>
+                    }
                 </td>
             </tr>
         }

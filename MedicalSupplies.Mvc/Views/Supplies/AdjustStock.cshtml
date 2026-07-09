@@ -43,16 +43,6 @@
             <button type="submit" class="btn">Lưu thay đổi</button>
         </div>
     </form>
-    
-    <div>
-        <div class="info-box">
-            <h4>Hướng dẫn Test Concurrency (Câu 14)</h4>
-            <p>1. Mở trang này ở 2 tab trình duyệt khác nhau.</p>
-            <p>2. Ở Tab 1, nhập số lượng thay đổi và bấm Lưu (Sẽ thành công).</p>
-            <p>3. Ở Tab 2, tiếp tục nhập số và bấm Lưu.</p>
-            <p><strong>Kết quả:</strong> Hệ thống sẽ từ chối và hiển thị thông báo lỗi màu đỏ vì <em>RowVersion</em> của Tab 2 đã bị cũ so với Database sau khi Tab 1 lưu!</p>
-        </div>
-    </div>
 </div>
 
 @section Scripts {

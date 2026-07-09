@@ -17,95 +17,124 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
+build_property.EntryPointFilePath = 
 build_property.RootNamespace = MedicalSupplies.Mvc
 build_property.RootNamespace = MedicalSupplies.Mvc
-build_property.ProjectDir = /Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/
+build_property.ProjectDir = D:\learning\asp.net\lab06\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
-build_property.RazorLangVersion = 9.0
+build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc
+build_property.MSBuildProjectDirectory = D:\learning\asp.net\lab06\Mini-Medical-Supplies-Catalog\MedicalSupplies.Mvc
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/DataHealth/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGF0YUhlYWx0aC9JbmRleC5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Issues/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSXNzdWVzL0NyZWF0ZS5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/AuditLogs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXVkaXRMb2dzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/DataHealth/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGF0YUhlYWx0aFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_SupplyCard.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19TdXBwbHlDYXJkLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_SupplySearchResultTable.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19TdXBwbHlTZWFyY2hSZXN1bHRUYWJsZS5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Home/StatusCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdGF0dXNDb2RlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/AdjustStock.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvQWRqdXN0U3RvY2suY3NodG1s
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Issues/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXNzdWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvQ3JlYXRlLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Detail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvRGV0YWlsLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvRWRpdC5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_SupplyCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdXBwbHlDYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Filter.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvRmlsdGVyLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_SupplySearchResultTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdXBwbHlTZWFyY2hSZXN1bHRUYWJsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvSW5kZXguY3NodG1s
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Search.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvU2VhcmNoLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/AdjustStock.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcQWRqdXN0U3RvY2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Stats.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvU3RhdHMuY3NodG1s
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Trash.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3VwcGxpZXMvVHJhc2guY3NodG1s
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Filter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcRmlsdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/macos/Documents/asp.net/lab05/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-m7105ciai9
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Stats.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcU3RhdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/Trash.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcVHJhc2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Supplies/UploadImage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXNcVXBsb2FkSW1hZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/learning/asp.net/lab06/Mini-Medical-Supplies-Catalog/MedicalSupplies.Mvc/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-zkb79a9ec6

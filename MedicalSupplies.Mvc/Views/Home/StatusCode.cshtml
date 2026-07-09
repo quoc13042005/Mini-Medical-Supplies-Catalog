@@ -1,0 +1,30 @@
+@model int
+@{
+    ViewData["Title"] = $"Lỗi {Model}";
+}
+
+<div class="page-header">
+    <h1 class="page-title text-danger">Lỗi @Model</h1>
+</div>
+
+<div class="alert alert-danger" style="background: #fef2f2; border-color: #f87171; color: #991b1b; padding: 20px; border-radius: 8px;">
+    @if (Model == 400)
+    {
+        <h4>400 - Yêu cầu không hợp lệ (Bad Request)</h4>
+        <p>Yêu cầu của bạn bị từ chối do thiếu mã bảo mật Anti-forgery Token (hoặc dữ liệu gửi lên không đúng định dạng).</p>
+    }
+    else if (Model == 404)
+    {
+        <h4>404 - Không tìm thấy (Not Found)</h4>
+        <p>Đường dẫn hoặc dữ liệu bạn yêu cầu không tồn tại.</p>
+    }
+    else
+    {
+        <h4>Đã xảy ra lỗi hệ thống</h4>
+        <p>Mã lỗi hệ thống trả về: @Model</p>
+    }
+    
+    <div style="margin-top: 15px;">
+        <a asp-controller="Home" asp-action="Index" style="display: inline-block; padding: 8px 16px; background-color: #3b82f6; color: white; text-decoration: none; border-radius: 4px;">Trở về Trang chủ</a>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+@model IEnumerable<MedicalSupplies.Mvc.Models.AuditLog>
+@{
+    ViewData["Title"] = "Audit Logs";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Audit Logs</h1>
+        <p class="page-description">Lịch sử thao tác hệ thống</p>
+    </div>
+</div>
+
+<div class="form-box mb-4">
+    <form method="get" class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label">User</label>
+            <input type="text" name="user" value="@ViewData["SearchUser"]" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Action</label>
+            <input type="text" name="actionName" value="@ViewData["SearchAction"]" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Result</label>
+            <select name="result" class="form-control">
+                <option value="">-- All --</option>
+                <option value="Success" selected="@(ViewData["SearchResult"]?.ToString() == "Success")">Success</option>
+                <option value="Failed" selected="@(ViewData["SearchResult"]?.ToString() == "Failed")">Failed</option>
+                <option value="Denied" selected="@(ViewData["SearchResult"]?.ToString() == "Denied")">Denied</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">From</label>
+            <input type="date" name="fromDate" value="@ViewData["SearchFromDate"]" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">To</label>
+            <input type="date" name="toDate" value="@ViewData["SearchToDate"]" class="form-control" />
+        </div>
+        <div class="col-md-1 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="info-box">
+        Không tìm thấy log nào phù hợp với bộ lọc.
+    </div>
+}
+else
+{
+    <div style="overflow-x: auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Entity</th>
+                    <th>Entity ID</th>
+                    <th>Result</th>
+                    <th>IP</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var log in Model)
+            {
+                <tr>
+                    <td>@log.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@log.UserName</td>
+                    <td>@log.Action</td>
+                    <td>@log.EntityName</td>
+                    <td>@log.EntityId</td>
+                    <td>
+                        @if(log.Result == "Success") {
+                            <span class="text-success">@log.Result</span>
+                        } else {
+                            <span class="text-danger">@log.Result</span>
+                        }
+                    </td>
+                    <td>@log.IpAddress</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

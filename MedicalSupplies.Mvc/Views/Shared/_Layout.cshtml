@@ -15,11 +15,13 @@
             </div>
             <nav class="main-nav">
                 <a asp-area="" asp-controller="Supplies" asp-action="Index">Quản lý Vật tư</a>
-                <a asp-area="" asp-controller="Supplies" asp-action="Search">Tìm kiếm (F1)</a>
+                <a asp-area="" asp-controller="Supplies" asp-action="Search">Tìm kiếm</a>
                 <a asp-area="" asp-controller="Supplies" asp-action="Trash">Thùng rác</a>
+                <a asp-area="" asp-controller="AuditLogs" asp-action="Index">Audit Logs</a>
                 <a asp-area="" asp-controller="DataHealth" asp-action="Index">Data Health</a>
                 <a class="text-danger fw-bold" href="/api/supplies/9999">API Error Demo</a>
             </nav>
+            <partial name="_LoginPartial" />
         </div>
     </header>
 
@@ -29,7 +31,7 @@
 
     <footer class="site-footer">
         <div class="container footer-content">
-            <span>&copy; 2025 - MedicalSupplies.Mvc - Lab03</span>
+            <span>&copy; 2025 - MedicalSupplies.Mvc - Lab06</span>
             <a href="#">Privacy</a>
         </div>
     </footer>

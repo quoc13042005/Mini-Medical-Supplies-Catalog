@@ -13,6 +13,7 @@ public class Supply
     public string Provider { get; set; } = string.Empty; // Nhà cung cấp
     public decimal Price { get; set; } // Đơn giá
     public int Quantity { get; set; } // Số lượng tồn kho
+    public string? ImagePath { get; set; }
     public DateTime LastUpdated { get; set; } // Ngày cập nhật gần nhất
 
     public bool IsDeleted { get; set; }

@@ -4,19 +4,28 @@ using MedicalSupplies.Mvc.Data;
 using MedicalSupplies.Mvc.Models;
 using MedicalSupplies.Mvc.ViewModels;
 
+using Microsoft.AspNetCore.Authorization;
+using MedicalSupplies.Mvc.Services;
+
 namespace MedicalSupplies.Mvc.Controllers;
 
+[Authorize]
 public class SuppliesController : Controller
 {
     private readonly AppDbContext _context;
     private readonly ILogger<SuppliesController> _logger;
+    private readonly IAuditLogService _auditLogService;
+    private readonly IFileUploadService _fileUploadService;
 
-    public SuppliesController(AppDbContext context, ILogger<SuppliesController> logger)
+    public SuppliesController(AppDbContext context, ILogger<SuppliesController> logger, IAuditLogService auditLogService, IFileUploadService fileUploadService)
     {
         _context = context;
         _logger = logger;
+        _auditLogService = auditLogService;
+        _fileUploadService = fileUploadService;
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         var supplies = await _context.Supplies
@@ -26,6 +35,7 @@ public class SuppliesController : Controller
         return View(supplies);
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> Search(string? keyword, decimal? minPrice)
     {
@@ -54,6 +64,7 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "CanManageProduct")]
     public IActionResult Create()
     {
         return View(new SupplyCreateViewModel());
@@ -90,6 +101,7 @@ public class SuppliesController : Controller
 
         _context.Supplies.Add(supply);
         await _context.SaveChangesAsync();
+        await _auditLogService.LogAsync("CreateSupply", "Supply", supply.Id.ToString(), "Success");
         _logger.LogInformation("Supply created. SupplyId={SupplyId}, Code={Code}", supply.Id, supply.Code);
 
         TempData["Success"] = "Đã thêm vật tư thành công.";
@@ -97,6 +109,7 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> Edit(int id)
     {
         var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
@@ -120,6 +133,7 @@ public class SuppliesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> Edit(int id, SupplyEditViewModel model)
     {
         if (id != model.Id) return NotFound();
@@ -146,6 +160,7 @@ public class SuppliesController : Controller
         try
         {
             await _context.SaveChangesAsync();
+            await _auditLogService.LogAsync("EditSupply", "Supply", id.ToString(), "Success");
             _logger.LogInformation("Supply updated. SupplyId={SupplyId}", id);
             TempData["Success"] = "Đã cập nhật vật tư thành công.";
             return RedirectToAction(nameof(Index));
@@ -158,6 +173,7 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "CanAdjustStock")]
     public async Task<IActionResult> AdjustStock(int id)
     {
         var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
@@ -177,6 +193,7 @@ public class SuppliesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "CanAdjustStock")]
     public async Task<IActionResult> AdjustStock(int id, SupplyAdjustStockViewModel model)
     {
         if (id != model.Id) return NotFound();
@@ -217,12 +234,15 @@ public class SuppliesController : Controller
         try
         {
             await _context.SaveChangesAsync();
+            await _auditLogService.LogAsync("AdjustStock", "Supply", id.ToString(), "Success", $"Adjusted by {model.AdjustQuantity}");
             _logger.LogInformation("Stock adjusted. SupplyId={SupplyId}, Change={Change}, NewQuantity={NewQuantity}", id, model.AdjustQuantity, supply.Quantity);
             TempData["Success"] = $"Đã {(model.AdjustQuantity >= 0 ? "thêm" : "xuất")} {Math.Abs(model.AdjustQuantity)} vào kho thành công.";
             return RedirectToAction(nameof(Index));
         }
         catch (DbUpdateConcurrencyException)
         {
+            _context.Entry(supply).State = EntityState.Detached;
+            await _auditLogService.LogAsync("AdjustStock", "Supply", id.ToString(), "Failed", "Concurrency conflict");
             ModelState.AddModelError(string.Empty, "Dữ liệu đã được người khác cập nhật. Vui lòng tải lại trang và thử lại.");
             model.Code = supply.Code;
             model.Name = supply.Name;
@@ -232,6 +252,7 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> Delete(int id)
     {
         var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
@@ -241,6 +262,7 @@ public class SuppliesController : Controller
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
@@ -251,6 +273,7 @@ public class SuppliesController : Controller
         supply.LastUpdated = DateTime.Now;
 
         await _context.SaveChangesAsync();
+        await _auditLogService.LogAsync("SoftDeleteSupply", "Supply", id.ToString(), "Success");
         _logger.LogWarning("Supply soft deleted. SupplyId={SupplyId}", id);
 
         TempData["Success"] = "Đã xóa mềm vật tư.";
@@ -258,6 +281,7 @@ public class SuppliesController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> Trash()
     {
         var deletedSupplies = await _context.Supplies
@@ -271,6 +295,7 @@ public class SuppliesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Policy = "CanManageProduct")]
     public async Task<IActionResult> Restore(int id)
     {
         var supply = await _context.Supplies
@@ -284,9 +309,61 @@ public class SuppliesController : Controller
         supply.LastUpdated = DateTime.Now;
 
         await _context.SaveChangesAsync();
+        await _auditLogService.LogAsync("RestoreSupply", "Supply", id.ToString(), "Success");
         _logger.LogInformation("Supply restored. SupplyId={SupplyId}", id);
 
         TempData["Success"] = "Đã khôi phục vật tư.";
         return RedirectToAction(nameof(Trash));
+    }
+
+    [HttpGet]
+    [Authorize(Policy = "CanUploadProductImage")]
+    public async Task<IActionResult> UploadImage(int id)
+    {
+        var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
+        if (supply == null) return NotFound();
+
+        return View(supply);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize(Policy = "CanUploadProductImage")]
+    public async Task<IActionResult> UploadImage(int id, IFormFile imageFile)
+    {
+        var supply = await _context.Supplies.FirstOrDefaultAsync(s => s.Id == id);
+        if (supply == null) return NotFound();
+
+        if (imageFile == null || imageFile.Length == 0)
+        {
+            ModelState.AddModelError(string.Empty, "Vui lòng chọn file ảnh.");
+            return View(supply);
+        }
+
+        string oldImagePath = supply.ImagePath;
+        try
+        {
+            var newImagePath = await _fileUploadService.SaveProductImageAsync(imageFile);
+            supply.ImagePath = newImagePath;
+            supply.LastUpdated = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            await _auditLogService.LogAsync("UploadImage", "Supply", id.ToString(), "Success");
+
+            // Chỉ xóa ảnh cũ khi đã update database thành công
+            if (!string.IsNullOrEmpty(oldImagePath))
+            {
+                _fileUploadService.DeleteImage(oldImagePath);
+            }
+
+            TempData["Success"] = "Upload ảnh thành công.";
+            return RedirectToAction(nameof(Index)); // Or Detail if it exists
+        }
+        catch (Exception ex)
+        {
+            await _auditLogService.LogAsync("UploadImage", "Supply", id.ToString(), "Failed", ex.Message);
+            ModelState.AddModelError(string.Empty, ex.Message);
+            return View(supply);
+        }
     }
 }

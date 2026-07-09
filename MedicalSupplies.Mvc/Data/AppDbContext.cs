@@ -1,9 +1,10 @@
 using MedicalSupplies.Mvc.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalSupplies.Mvc.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -11,9 +12,11 @@ public class AppDbContext : DbContext
     public DbSet<Supply> Supplies => Set<Supply>();
     public DbSet<Issue> Issues => Set<Issue>();
     public DbSet<IssueItem> IssueItems => Set<IssueItem>();
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<SupplyCategory>(entity =>
         {
             entity.ToTable("SupplyCategories");
